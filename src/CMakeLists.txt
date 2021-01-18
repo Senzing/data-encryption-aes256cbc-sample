@@ -304,5 +304,5 @@ endif ()
 ### Recursive work on subdirectories
 #############################################
 
-add_subdirectory(EncryptionPlugins)
+add_subdirectory(encryptionPlugins)
 
