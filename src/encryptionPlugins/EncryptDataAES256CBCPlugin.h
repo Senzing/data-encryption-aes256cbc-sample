@@ -10,7 +10,7 @@
 #define ENCRYPT_DATA_STD_PLUGIN_H
 
 
-#include "plugin/g2EncryptionPluginInterface.h"
+#include "interface/g2EncryptionPluginInterface.h"
 
 
 #if defined(_WIN32)
