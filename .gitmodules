@@ -1,0 +1,3 @@
+[submodule "src/senzing-data-encryption-specification"]
+	path = src/senzing-data-encryption-specification
+	url = https://github.com/Senzing/senzing-data-encryption-specification.git

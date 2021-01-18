@@ -6,7 +6,7 @@ Sample encryption plugins for a G2 data repository.
 ### Linux
 
 ```
-cd dev
+cd src
 cmake -DCMAKE_BUILD_TYPE=Release setup .
 make all
 make install
@@ -15,7 +15,7 @@ make install
 ### Mac OS
 
 ```
-cd dev
+cd src
 export CC=clang
 export CXX=clang++
 cmake -DCMAKE_BUILD_TYPE=Release setup .
@@ -26,7 +26,7 @@ gmake install
 ### Windows
 
 ```
-cd dev
+cd src
 cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" -A x64 setup .
 ```
 Build the project through visual studio, or via the command line.

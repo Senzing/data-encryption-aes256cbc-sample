@@ -277,13 +277,8 @@ endif ()
 #############################################
 ### Linking setup
 #############################################
-include_directories(${CMAKE_SOURCE_DIR}/libs
-                    ${CMAKE_BINARY_DIR}/libs )
 
-set(LINK_DIRS
-    ${CMAKE_BINARY_DIR}/libs )
-
-link_directories(${LINK_DIRS})
+include_directories(${CMAKE_SOURCE_DIR}/senzing-data-encryption-specification/src)
 
 if ( "${USE_OPENSSL}" STREQUAL "TRUE" )
   if ( WIN32 )
@@ -309,5 +304,5 @@ endif ()
 ### Recursive work on subdirectories
 #############################################
 
-add_subdirectory(EncryptionPlugins)
+add_subdirectory(encryptionPlugins)
 

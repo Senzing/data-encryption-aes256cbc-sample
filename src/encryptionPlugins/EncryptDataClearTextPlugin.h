@@ -10,7 +10,7 @@
 #define CLEAR_TEXT_ENCRYPTION_DATA_PLUGIN_H
 
 
-#include "plugin/g2EncryptionPluginInterface.h"
+#include "interface/g2EncryptionPluginInterface.h"
 
 
 #if defined(_WIN32)
