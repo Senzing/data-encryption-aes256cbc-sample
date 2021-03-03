@@ -86,7 +86,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 
   /* default initial variables */
   free(mEncryptionKey);
+  mEncryptionKey = NULL;
   free(mEncryptionIV);
+  mEncryptionIV = NULL;
 
   /* finalize the close-plugin function */
   CLOSE_PLUGIN_FUNCTION_POSTAMBLE
