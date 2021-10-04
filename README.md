@@ -116,13 +116,13 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
        Example:
 
         ```console
-        sudo docker run \
+        docker run \
           --interactive \
           --rm \
           --tty \
           --volume ${MY_OUTPUT_DIR}:/output \
           senzing/data-encryption-aes256cbc-sample \
-            cp /src/dist/lib/* /output/
+            cp /src/dist/lib/libg2EncryptDataAES256CBC.so /output/
         ```
 
 #### Mac OS
