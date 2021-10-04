@@ -19,7 +19,7 @@ RUN apt-get update \
 
 COPY ./src /src
 
-# Build code
+# Build code.
 
 WORKDIR /src
 RUN cmake -DCMAKE_BUILD_TYPE=Release setup . \
@@ -29,5 +29,3 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release setup . \
 # Output will be in:
 #  - /src/dist/lib/libg2EncryptDataAES256CBC.so
 #  - /src/dist/lib/libg2EncryptDataClearText.so
-
-ENTRYPOINT ["/bin/bash"]

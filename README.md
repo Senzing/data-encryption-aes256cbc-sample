@@ -11,7 +11,15 @@ Sample encryption plugins for a G2 data repository.
 1. [Preamble](#preamble)
     1. [Legend](#legend)
 1. [Expectations](#expectations)
-1. [Develop]()
+1. [Develop](#develop)
+    1. [Prerequisites for development](#prerequisites-for-development)
+    1. [Clone repository](#clone-repository)
+    1. [Build the plugins](#build-the-plugins)
+        1. [Linux](#linux)
+        1. [Mac OS](#mac-os)
+        1. [Windows](#windows)
+1. [Errors](#errors)
+1. [References](#references)
 
 ## Preamble
 
@@ -70,7 +78,7 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
 
 1. Using the environment variables values just set, follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md) to install the Git repository.
 
-### Building the plugins
+### Build the plugins
 
 #### Linux
 
@@ -142,3 +150,9 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
     ```
 
 1. Build the project through visual studio, or via the command line.
+
+## Errors
+
+1. See [docs/errors.md](docs/errors.md).
+
+## References
