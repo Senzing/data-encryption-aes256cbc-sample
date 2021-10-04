@@ -1,4 +1,4 @@
-# data-encryption-AES256CBC-sample
+# data-encryption-aes256cbc-sample
 
 ## Synopsis
 
@@ -11,6 +11,7 @@ Sample encryption plugins for a G2 data repository.
 1. [Preamble](#preamble)
     1. [Legend](#legend)
 1. [Expectations](#expectations)
+1. [Develop]()
 
 ## Preamble
 
@@ -92,6 +93,29 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/maste
     ```
 
     The newly created binaries will be in the `${GIT_REPOSITORY_DIR}/target` directory.
+
+1. Alternative docker.
+   Example:
+
+    1. :pencil2: Define where to put the files.
+       Example:
+
+        ```console
+        export MY_OUTPUT_DIR=/tmp
+        ```
+
+    1. Extract the files to the output directory.
+       Example:
+
+        ```console
+        sudo docker run \
+          --interactive \
+          --rm \
+          --tty \
+          --volume ${MY_OUTPUT_DIR}:/output \
+          senzing/data-encryption-aes256cbc-sample \
+            cp /src/dist/lib/* /output/
+        ```
 
 #### Mac OS
 
