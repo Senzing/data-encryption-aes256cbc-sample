@@ -145,23 +145,34 @@ Example:
 ### Encrypting the data in the repository
 
 If data has been previously loaded into the data repository,
-then the data repository must be encrypted using the "g2db2encrypt" application.  
+then the data repository must be encrypted using the `g2db2encrypt` application.  
 This program will step through the data repository, encrypting the sensitive contents of the repository.  
 It can also be used to decrypt a repository.
 
-1. Command to Encrypt
+1. :pencil2: Identify the `g2` directory.
+   Example:
 
     ```console
+    export SENZING_G2_DIR=/opt/senzing/g2
+    ```
+
+1. Command to Encrypt.
+   Example:
+
+    ```console
+    cd {SENZING_G2_DIR}
     ./bin/g2dbencrypt -c etc/G2Module.ini -e
     ```
 
-1. Command to Decrypt:  
+1. Command to Decrypt.
+   Example:
 
     ```console
+    cd {SENZING_G2_DIR}
     ./bin/g2dbencrypt -c etc/G2Module.ini -e
     ```
 
-Note:  If you are changing the method of encryption from one form to another,
+**Note:**  If you are changing the method of encryption from one form to another,
 you must entirely decrypt the repository using the configuration for the old encryption method,
 and then encrypt it using the configuration for the new method.
 
