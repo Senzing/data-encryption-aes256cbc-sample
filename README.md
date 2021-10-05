@@ -106,7 +106,8 @@ the security and data standards of the user's organization.
 To enable encryption on the data repository,
 the engine must be set up with the encryption library in place.  
 
-Copy the encryption library into the `lib` folder of the G2 installation.
+Copy the encryption library into the `lib` folder of the G2 installation
+(e.g. `/opt/senzing/g2/lib`).
 Alternately, if you wish to have the library in a separate location,
 put the new location on your system path, so that the engine may find the library.
 
