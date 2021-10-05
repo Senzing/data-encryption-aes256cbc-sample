@@ -104,7 +104,7 @@ To enable encryption on the data repository, the engine must be set up with the 
    The parameters that are in the "DATA_ENCRYPTION" group will be made available to the encryption plugin,
    and they may be accessed as demonstrated in the source code for the "AES-256-CBC" sample plugin.
 
-    ```json
+    ```console
     {
         "PIPELINE": {
             "SUPPORTPATH": "/home/username/senzing/data",
