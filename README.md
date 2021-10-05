@@ -169,7 +169,7 @@ It can also be used to decrypt a repository.
 
     ```console
     cd {SENZING_G2_DIR}
-    ./bin/g2dbencrypt -c etc/G2Module.ini -e
+    ./bin/g2dbencrypt -c etc/G2Module.ini -d
     ```
 
 **Note:**  If you are changing the method of encryption from one form to another,
