@@ -99,6 +99,7 @@ To do so...
 1. Copy the encryption library into the "lib" folder of the G2 installation.
    Alternately, if you wish to have the library in a separate location,
    put the new location on your system path, so that the engine may find the library.
+
 1. Add needed parameters to your engine startup parameters.  
    This will tell the engine what plugin to use, what encryption keys to use, etc...  
    For example, the "AES-256-CBC" sample plugin requires the following parameters in its INI setup.  
