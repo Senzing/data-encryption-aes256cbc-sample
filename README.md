@@ -12,6 +12,11 @@ Sample encryption plugins for a G2 data repository.
     1. [Legend](#legend)
 1. [Expectations](#expectations)
 1. [Setting Up G2 Data Repository Encryption](#setting-up-g2-data-repository-encryption)
+    1. [General Setup Steps](#general-setup-steps)
+    1. [Createing an encryption plugin library](#creating-an-encryption-plugin-library)
+    1. [Configuring the engine to use encryption](#configuring-the-engine-to-use-encryption)
+    1. [Encrypting the data in the repository](#encrypting-the-data-in-the-repository)
+    1. [Using the engine with the encrypted data repository](#using-the-engine-with-the-encrypted-data-repository)
 1. [Develop](#develop)
     1. [Prerequisites for development](#prerequisites-for-development)
     1. [Clone repository](#clone-repository)
@@ -54,19 +59,21 @@ describing where we can improve.   Now on with the show...
 Data in the G2 engine repository may be encrypted using an external encryption plugin.
 This allows for users to decide when and how to encrypt their sensitive data.
 
-A data repository may be set up for encryption, whether it has data loaded into it previously or not.
-If data has been already loaded, then the data repository must be encrypted
-with the utility program prior to using the system.
+A data repository may be set up for encryption,
+whether it has data loaded into it previously or not.
+If data has been already loaded,
+then the data repository must be encrypted with the utility program prior to using the system.
 
 ### General Setup Steps
 
 These are the general steps for setting up G2 data encryption.
-More specific details are given below.
 
-1. Create an encryption plugin executable, for use in encrypting/decrypting data.
+1. Create an encryption plugin executable, for use in encrypting/decrypting data
 1. Configure the engine to use encryption
 1. Encrypt the data already in the datastore
 1. Use the G2 engine normally
+
+More specific details follow.
 
 ### Creating an encryption plugin library
 
@@ -75,36 +82,38 @@ the engine must be configured with an executable library with encryption/decrypt
 The user may use an existing library, or create their own.  
 In this way, they may use any kind of encryption/decryption algorithm they choose.
 
-To create such a library, a program must be compiled that implements the G2 standard encryption interface.
-That interface is available on
-[GitHub](https://github.com/Senzing/senzing-data-encryption-specification).  
+To create such a library,
+a program must be compiled that implements the G2 standard encryption interface.
+That interface is available in the
+[senzing-data-encryption-specification](https://github.com/Senzing/senzing-data-encryption-specification).  
 The actual interface header file is located at
 [g2EncryptionPluginInterface.h](https://github.com/Senzing/senzing-data-encryption-specification/blob/main/src/interface/g2EncryptionPluginInterface.h).
 
 The source code for a sample library is available on
 [GitHub](https://github.com/Senzing/data-encryption-AES256CBC-sample).  
 This library may be compiled on any operating system that G2 supports.  
-When compiled, it will create two libraries: a simple cleartext demonstration library,
-and an encryption library based on the AES-256 cipher block chain.
+When compiled, it will create two libraries:
+
+1. A simple cleartext demonstration library
+1. An encryption library based on the AES-256 cipher block chain.
 
 The source code for these two plugins is meant as an example of how to create encryption plugins.  
-For ideal security, a new plugin should be created which implements the security and data standards of the user's organization.
+For ideal security, a new plugin should be created which implements
+the security and data standards of the user's organization.
 
 ### Configuring the engine to use encryption
 
 To enable encryption on the data repository,
 the engine must be set up with the encryption library in place.  
 
-
-
-Copy the encryption library into the "lib" folder of the G2 installation.
+Copy the encryption library into the `lib` folder of the G2 installation.
 Alternately, if you wish to have the library in a separate location,
 put the new location on your system path, so that the engine may find the library.
 
-
 Add needed parameters to your engine startup parameters.  
-This will tell the engine what plugin to use, what encryption keys to use, etc...  
+This will tell the engine what plugin to use, what encryption keys to use.
 For example, the "AES-256-CBC" sample plugin requires the following parameters in its INI setup.  
+
 **Note:**  The parameter names may be different, depending on what kind of encryption library you are using.  
 The parameters that are in the "DATA_ENCRYPTION" group will be made available to the encryption plugin,
 and they may be accessed as demonstrated in the source code for the "AES-256-CBC" sample plugin.
