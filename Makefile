@@ -33,7 +33,7 @@ docker-build:
 package: docker-build
 	@mkdir -p $(TARGET_DIRECTORY) || true
 	@CONTAINER_ID=$$(docker create $(DOCKER_IMAGE_NAME)); \
-	docker cp $$CONTAINER_ID:/src/dist/. $(TARGET_DIRECTORY)/; \
+	docker cp $$CONTAINER_ID:/results/. $(TARGET_DIRECTORY)/; \
 	docker rm -v $$CONTAINER_ID
 
 # -----------------------------------------------------------------------------
