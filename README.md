@@ -104,23 +104,22 @@ To enable encryption on the data repository, the engine must be set up with the 
    The parameters that are in the "DATA_ENCRYPTION" group will be made available to the encryption plugin,
    and they may be accessed as demonstrated in the source code for the "AES-256-CBC" sample plugin.
 
-    ```console
     {
-        "PIPELINE": {
-            "SUPPORTPATH": "/home/username/senzing/data",
-            "CONFIGPATH": "/home/username/senzing/etc",
-            "RESOURCEPATH": "/home/username/senzing/resources"
-        },
-        "SQL": {
-            "CONNECTION": "sqlite3://na:na@/home/username/senzing/var/sqlite/G2C.db"
-        },
-        "DATA_ENCRYPTION": {
-            "ENCRYPTION_PLUGIN_NAME": "g2EncryptDataAES256CBC",
-            "ENCRYPTION_KEY": "68402346802394406802620602396369",
-            "ENCRYPTION_INITIALIZATION_VECTOR": "6432072349624624"
-        }
+        "PIPELINE": {
+            "SUPPORTPATH": "/home/username/senzing/data",
+            "CONFIGPATH": "/home/username/senzing/etc",
+            "RESOURCEPATH": "/home/username/senzing/resources"
+        },
+        "SQL": {
+            "CONNECTION": "sqlite3://na:na@/home/username/senzing/var/sqlite/G2C.db"
+        },
+        "DATA_ENCRYPTION": {
+            "ENCRYPTION_PLUGIN_NAME": "g2EncryptDataAES256CBC",
+            "ENCRYPTION_KEY": "68402346802394406802620602396369",
+            "ENCRYPTION_INITIALIZATION_VECTOR": "6432072349624624"
+        }
     }
-    ```
+
 
 1. With the library in place, and the encryption parameters set,
    the G2 engine is now ready to encrypt/decrypt data.
