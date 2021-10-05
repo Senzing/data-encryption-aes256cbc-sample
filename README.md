@@ -124,12 +124,12 @@ Example:
 ```json
 {
     "PIPELINE": {
-        "SUPPORTPATH": "/home/username/senzing/data",
-        "CONFIGPATH": "/home/username/senzing/etc",
-        "RESOURCEPATH": "/home/username/senzing/resources"
+        "SUPPORTPATH": "/opt/senzing/data",
+        "CONFIGPATH": "/etc/opt/senzing",
+        "RESOURCEPATH": "/opt/senzing/g2/resources"
     },
     "SQL": {
-        "CONNECTION": "sqlite3://na:na@/home/username/senzing/var/sqlite/G2C.db"
+        "CONNECTION": "sqlite3://na:na@/var/opt/senzing/sqlite/G2C.db"
     },
     "DATA_ENCRYPTION": {
         "ENCRYPTION_PLUGIN_NAME": "g2EncryptDataAES256CBC",
