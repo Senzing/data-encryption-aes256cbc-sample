@@ -92,22 +92,25 @@ For ideal security, a new plugin should be created which implements the security
 
 ### Configuring the engine to use encryption
 
-To enable encryption on the data repository, the engine must be set up with the encryption library in place.  To do so...
-
-1. Copy the encryption library into the "lib" folder of the G2 installation.
-   Alternately, if you wish to have the library in a separate location,
-   put the new location on your system path, so that the engine may find the library.
-1. Add needed parameters to your engine startup parameters.  
-   This will tell the engine what plugin to use, what encryption keys to use, etc...  
-   For example, the "AES-256-CBC" sample plugin requires the following parameters in its INI setup.  
-   Note:  The parameter names may be different, depending on what kind of encryption library you are using.  
-   The parameters that are in the "DATA_ENCRYPTION" group will be made available to the encryption plugin,
-   and they may be accessed as demonstrated in the source code for the "AES-256-CBC" sample plugin.
+1. X
 
     ```json
-    {}
+    {
+        "PIPELINE": {
+            "SUPPORTPATH": "/home/username/senzing/data",
+            "CONFIGPATH": "/home/username/senzing/etc",
+            "RESOURCEPATH": "/home/username/senzing/resources"
+        },
+        "SQL": {
+            "CONNECTION": "sqlite3://na:na@/home/username/senzing/var/sqlite/G2C.db"
+        },
+        "DATA_ENCRYPTION": {
+            "ENCRYPTION_PLUGIN_NAME": "g2EncryptDataAES256CBC",
+            "ENCRYPTION_KEY": "68402346802394406802620602396369",
+            "ENCRYPTION_INITIALIZATION_VECTOR": "6432072349624624"
+        }
+    }
     ```
-
 
 1. With the library in place, and the encryption parameters set,
    the G2 engine is now ready to encrypt/decrypt data.
