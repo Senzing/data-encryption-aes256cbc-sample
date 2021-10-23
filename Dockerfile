@@ -2,7 +2,7 @@
 # Stages
 # -----------------------------------------------------------------------------
 
-ARG IMAGE_BUILDER=debian:10.10
+ARG IMAGE_BUILDER=debian:10.10@sha256:e5cfab8012b17d80f93a7f567797b0c8a2839069d4f50e499152162152518663
 ARG IMAGE_FINAL=busybox:1.34.0
 
 # -----------------------------------------------------------------------------
@@ -10,16 +10,17 @@ ARG IMAGE_FINAL=busybox:1.34.0
 # -----------------------------------------------------------------------------
 
 FROM ${IMAGE_BUILDER} as builder
-ENV REFRESHED_AT=2021-10-05
+ENV REFRESHED_AT=2021-10-23
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample-builder" \
       Maintainer="support@senzing.com" \
-      Version="1.0.1"
+      Version="1.0.2"
 
 # Install packages via apt.
 
 RUN apt-get update \
  && apt-get -y install \
+      librdkafka-dev \
       cmake \
       libssl-dev \
  && rm -rf /var/lib/apt/lists/*
