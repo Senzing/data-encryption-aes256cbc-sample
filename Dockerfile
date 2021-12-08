@@ -2,14 +2,15 @@
 # Stages
 # -----------------------------------------------------------------------------
 
-ARG IMAGE_BUILDER=debian:10.10@sha256:e5cfab8012b17d80f93a7f567797b0c8a2839069d4f50e499152162152518663
-ARG IMAGE_FINAL=busybox:1.34.0
+ARG BASE_BUILDER_IMAGE=debian:10.11@sha256:9a1f494bb52e5d18e2dfb0fd6e59dbfe69aae9feecff1b246ad69984fbe25772
+ARG BASE_IMAGE=busybox:1.34.0
 
 # -----------------------------------------------------------------------------
 # Stage: builder
 # -----------------------------------------------------------------------------
 
-FROM ${IMAGE_BUILDER} as builder
+FROM ${BASE_BUILDER_IMAGE} as builder
+
 ENV REFRESHED_AT=2021-10-23
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample-builder" \
@@ -44,8 +45,10 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release setup . \
 # Stage: final
 # -----------------------------------------------------------------------------
 
-FROM ${IMAGE_FINAL} as final
+FROM ${BASE_IMAGE} as final
+
 ENV REFRESHED_AT 2021-10-05
+
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
       Maintainer="support@senzing.com" \
       Version="1.0.1"
