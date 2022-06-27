@@ -2,8 +2,8 @@
 # Stages
 # -----------------------------------------------------------------------------
 
-ARG BASE_BUILDER_IMAGE=debian:11.3-slim@sha256:06a93cbdd49a265795ef7b24fe374fee670148a7973190fb798e43b3cf7c5d0f
-ARG BASE_IMAGE=busybox:1.34.1@sha256:ebadf81a7f2146e95f8c850ad7af8cf9755d31cdba380a8ffd5930fba5996095
+ARG BASE_BUILDER_IMAGE=debian:11.3-slim@sha256:f6957458017ec31c4e325a76f39d6323c4c21b0e31572efa006baa927a160891
+ARG BASE_IMAGE=busybox:1.34.1@sha256:3614ca5eacf0a3a1bcc361c939202a974b4902b9334ff36eb29ffe9011aaad83
 
 # -----------------------------------------------------------------------------
 # Stage: builder
@@ -11,7 +11,7 @@ ARG BASE_IMAGE=busybox:1.34.1@sha256:ebadf81a7f2146e95f8c850ad7af8cf9755d31cdba3
 
 FROM ${BASE_BUILDER_IMAGE} as builder
 
-ENV REFRESHED_AT=2022-05-16
+ENV REFRESHED_AT=2022-06-27
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample-builder" \
       Maintainer="support@senzing.com" \
