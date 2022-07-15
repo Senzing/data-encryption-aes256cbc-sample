@@ -286,6 +286,12 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/
 
 1. Build the project through visual studio, or via the command line.
 
+## Progamming tips
+
+1. Each plugin function has a "PREAMBLE" and "POSTAMBLE" macro.  These should be included in your plugin function implementations.  They help with operations such as error handling, buffer size checking, and so forth.  They are meant to simplify the handling of the data being passed into and out of the plugin.
+
+2. Each encrypt/decrypt call is provided with a memory buffer for returning result data.  If that buffer is found to be too small, then the function should return the code value G2_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR.  This will signal the G2 engine to retry, using a larger data buffer.  (See the PREAMBLE/POSTAMBLE macros to see how that return code is applied.)
+
 ## Errors
 
 1. See [docs/errors.md](docs/errors.md).
