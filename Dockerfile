@@ -15,7 +15,7 @@ ENV REFRESHED_AT=2022-09-27
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample-builder" \
       Maintainer="support@senzing.com" \
-      Version="1.0.2"
+      Version="1.0.3"
 
 # Install packages via apt.
 
@@ -51,7 +51,7 @@ ENV REFRESHED_AT 2021-10-05
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
       Maintainer="support@senzing.com" \
-      Version="1.0.1"
+      Version="1.0.3"
 
 # Copy files from prior step.
 
