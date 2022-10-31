@@ -2,8 +2,8 @@
 # Stages
 # -----------------------------------------------------------------------------
 
-ARG BASE_BUILDER_IMAGE=debian:11.5-slim@sha256:b46fc4e6813f6cbd9f3f6322c72ab974cc0e75a72ca02730a8861e98999875c7
-ARG BASE_IMAGE=senzing/senzingapi-runtime:3.3.1
+ARG BASE_BUILDER_IMAGE=debian:11.5-slim@sha256:e8ad0bc7d0ee6afd46e904780942033ab83b42b446b58efa88d31ecf3adf4678
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.3.2
 
 # -----------------------------------------------------------------------------
 # Stage: builder
@@ -11,7 +11,7 @@ ARG BASE_IMAGE=senzing/senzingapi-runtime:3.3.1
 
 FROM ${BASE_BUILDER_IMAGE} as builder
 
-ENV REFRESHED_AT=2022-10-11
+ENV REFRESHED_AT=2022-10-27
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample-builder" \
       Maintainer="support@senzing.com" \
