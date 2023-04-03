@@ -47,7 +47,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release setup . \
 
 FROM ${BASE_IMAGE} as final
 
-ENV REFRESHED_AT 2022-10-05
+ENV REFRESHED_AT=2022-10-05
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
       Maintainer="support@senzing.com" \
