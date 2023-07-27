@@ -33,7 +33,7 @@ void handleErrors(const char* errorMessage, struct ErrorInfoData* errorData)
   errorData->mErrorOccurred = true;
   strncpy(errorData->mErrorMessage, errorMessage, G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH);
   errorData->mErrorMessage[G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH - 1] = '\0';
-  //fprintf(stderr,"DEBUG: [%s]\n",errorData->mErrorMessage);
+  /*fprintf(stderr,"DEBUG: [%s]\n",errorData->mErrorMessage);*/
 }
 
 
