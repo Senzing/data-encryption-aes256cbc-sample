@@ -19,7 +19,6 @@ default: help
 
 .PHONY: docker-build
 docker-build:
-	git submodule update --init --recursive
 	docker build \
 		--tag $(DOCKER_IMAGE_NAME) \
 		--tag $(DOCKER_IMAGE_NAME):$(GIT_VERSION) \
