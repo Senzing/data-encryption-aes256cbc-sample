@@ -7,7 +7,7 @@
 **********************************************************************************/
 
 
-#include "EncryptDataClearTextPlugin.h"
+#include "interface/g2EncryptionPluginInterface.h"
 
 
 const char* getPluginSignature()

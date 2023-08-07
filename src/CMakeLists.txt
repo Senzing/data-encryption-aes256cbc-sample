@@ -306,3 +306,14 @@ endif ()
 
 add_subdirectory(encryptionPlugins)
 
+# testing binary
+enable_testing()
+
+add_executable(testPlainTextPlugin testPlainTextPlugin.c)
+target_link_libraries(testPlainTextPlugin g2EncryptDataClearText)
+add_test(NAME testPlainTextPlugin COMMAND testPlainTextPlugin)
+
+add_executable(testEncPlugin testEncPlugin.c)
+target_link_libraries(testEncPlugin g2EncryptDataAES256CBC)
+add_test(NAME testEncPlugin COMMAND testEncPlugin)
+

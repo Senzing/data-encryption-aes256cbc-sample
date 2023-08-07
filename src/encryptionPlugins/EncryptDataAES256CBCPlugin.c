@@ -7,7 +7,7 @@
 **********************************************************************************/
 
 
-#include "EncryptDataAES256CBCPlugin.h"
+#include "interface/g2EncryptionPluginInterface.h"
 #include <openssl/conf.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
@@ -33,6 +33,7 @@ void handleErrors(const char* errorMessage, struct ErrorInfoData* errorData)
   errorData->mErrorOccurred = true;
   strncpy(errorData->mErrorMessage, errorMessage, G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH);
   errorData->mErrorMessage[G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH - 1] = '\0';
+  /*fprintf(stderr,"DEBUG: [%s]\n",errorData->mErrorMessage);*/
 }
 
 
@@ -46,6 +47,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
   mEncryptionIV = NULL;
 
   /* get the encryption keys */
+  if (configParams != NULL)
   {
     size_t paramIndex;
     for (paramIndex = 0; paramIndex < configParams->numParameters; ++paramIndex)
@@ -299,7 +301,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
   ENCRYPT_DATA_FIELD_FUNCTION_PREAMBLE
 
   /* encrypt the data */
-  const size_t bufferLength = inputSize + 32;
+  const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
   unsigned char* ciphertext = malloc(bufferLength * sizeof(char));
   int ciphertext_len = encrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,ciphertext,&encryptionErrorData);
   if (!(encryptionErrorData.mErrorOccurred))
@@ -328,7 +330,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
   DECRYPT_DATA_FIELD_FUNCTION_PREAMBLE
 
   /* decrypt the data */
-  const size_t bufferLength = inputSize + 32;
+  const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
   unsigned char* decryptedtext = malloc(bufferLength * sizeof(char));
   int decryptedtext_len = decrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,decryptedtext,&decryptionErrorData);
   if (!(decryptionErrorData.mErrorOccurred))
