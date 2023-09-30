@@ -2,8 +2,8 @@
 # Stages
 # -----------------------------------------------------------------------------
 
-ARG BASE_BUILDER_IMAGE=debian:11.7-slim@sha256:924df86f8aad741a0134b2de7d8e70c5c6863f839caadef62609c1be1340daf5
-ARG BASE_IMAGE=senzing/senzingapi-runtime:3.6.0
+ARG BASE_BUILDER_IMAGE=debian:11.7-slim@sha256:c618be84fc82aa8ba203abbb07218410b0f5b3c7cb6b4e7248fda7785d4f9946
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.7.1
 
 # -----------------------------------------------------------------------------
 # Stage: builder
@@ -11,11 +11,11 @@ ARG BASE_IMAGE=senzing/senzingapi-runtime:3.6.0
 
 FROM ${BASE_BUILDER_IMAGE} as builder
 
-ENV REFRESHED_AT=2023-06-29
+ENV REFRESHED_AT=2023-09-29
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample-builder" \
       Maintainer="support@senzing.com" \
-      Version="1.0.6"
+      Version="1.0.9"
 
 # Install packages via apt.
 
@@ -47,11 +47,11 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release setup . \
 
 FROM ${BASE_IMAGE} as final
 
-ENV REFRESHED_AT=2023-06-29
+ENV REFRESHED_AT=2023-09-29
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
       Maintainer="support@senzing.com" \
-      Version="1.0.6"
+      Version="1.0.9"
 
 # Copy files from prior step.
 
