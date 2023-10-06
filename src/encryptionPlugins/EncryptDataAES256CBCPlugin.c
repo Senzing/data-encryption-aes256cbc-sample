@@ -1,6 +1,6 @@
 
 /**********************************************************************************
- © Copyright Senzing, Inc. 2020-2021
+ © Copyright Senzing, Inc. 2020-2023
  The source code for this program is not published or otherwise divested
  of its trade secrets, irrespective of what has been deposited with the U.S.
  Copyright Office.
@@ -350,5 +350,63 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 
   /* finalize decryption function */
   DECRYPT_DATA_FIELD_FUNCTION_POSTAMBLE
+}
+
+
+G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
+{
+  /* initialize encryption function */
+  ENCRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_PREAMBLE
+
+  /* encrypt the data */
+  const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
+  unsigned char* ciphertext = malloc(bufferLength * sizeof(char));
+  int ciphertext_len = encrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,ciphertext,&encryptionErrorData);
+  if (!(encryptionErrorData.mErrorOccurred))
+  {
+    if (((size_t) ciphertext_len) < maxResultSize)
+    {
+      memcpy(result, (const char*)ciphertext, ciphertext_len);
+      result[maxResultSize - 1] = '\0';
+      *resultSize = ciphertext_len;
+    }
+    else
+    {
+      resultSizeErrorOccurred = true;
+    }
+  }
+  free(ciphertext);
+
+  /* finalize encryption function */
+  ENCRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_POSTAMBLE
+}
+
+
+G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
+{
+  /* initialize encryption function */
+  DECRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_PREAMBLE
+
+  /* decrypt the data */
+  const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
+  unsigned char* decryptedtext = malloc(bufferLength * sizeof(char));
+  int decryptedtext_len = decrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,decryptedtext,&decryptionErrorData);
+  if (!(decryptionErrorData.mErrorOccurred))
+  {
+    if (((size_t) decryptedtext_len) < maxResultSize)
+    {
+      memcpy(result, (const char*)decryptedtext, decryptedtext_len);
+      result[maxResultSize - 1] = '\0';
+      *resultSize = (size_t)decryptedtext_len;
+    }
+    else
+    {
+      resultSizeErrorOccurred = true;
+    }
+  }
+  free(decryptedtext);
+
+  /* finalize decryption function */
+  DECRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_POSTAMBLE
 }
 

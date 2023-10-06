@@ -1,6 +1,6 @@
 
 /**********************************************************************************
- © Copyright Senzing, Inc. 2020-2021
+ © Copyright Senzing, Inc. 2020-2023
  The source code for this program is not published or otherwise divested
  of its trade secrets, irrespective of what has been deposited with the U.S.
  Copyright Office.
@@ -139,5 +139,55 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 
   /* finalize decryption function */
   DECRYPT_DATA_FIELD_FUNCTION_POSTAMBLE
+}
+
+
+G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
+{
+  /* initialize encryption function */
+  ENCRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_PREAMBLE
+
+  /* Just copy the input data to the result data (cleartext) */
+  if (!(encryptionErrorData.mErrorOccurred))
+  {
+    if (inputSize < (size_t)maxResultSize)
+    {
+      memcpy(result, input, inputSize);
+      result[maxResultSize - 1] = '\0';
+      *resultSize = inputSize;
+    }
+    else
+    {
+      resultSizeErrorOccurred = true;
+    }
+  }
+
+  /* finalize encryption function */
+  ENCRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_POSTAMBLE
+}
+
+
+G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
+{
+  /* initialize encryption function */
+  DECRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_PREAMBLE
+
+  /* Just copy the input data to the result data (cleartext) */
+  if (!(decryptionErrorData.mErrorOccurred))
+  {
+    if (inputSize < maxResultSize)
+    {
+      memcpy(result, input, inputSize);
+      result[maxResultSize - 1] = '\0';
+      *resultSize = inputSize;
+    }
+    else
+    {
+      resultSizeErrorOccurred = true;
+    }
+  }
+
+  /* finalize decryption function */
+  DECRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_POSTAMBLE
 }
 
