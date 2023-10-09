@@ -31,7 +31,7 @@ static char* mEncryptionIV;
 void handleErrors(const char* errorMessage, struct ErrorInfoData* errorData)
 {
   errorData->mErrorOccurred = true;
-  strncpy(errorData->mErrorMessage, errorMessage, G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH);
+  strncpy(errorData->mErrorMessage, errorMessage, G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH-1);
   errorData->mErrorMessage[G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH - 1] = '\0';
   /*fprintf(stderr,"DEBUG: [%s]\n",errorData->mErrorMessage);*/
 }
