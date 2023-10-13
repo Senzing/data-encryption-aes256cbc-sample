@@ -7,6 +7,7 @@
 **********************************************************************************/
 
 
+/* header files */
 #include "interface/g2EncryptionPluginInterface.h"
 #include <openssl/conf.h>
 #include <openssl/evp.h>
@@ -15,19 +16,20 @@
 
 
 /**********************************************************************************
-//
-//  Basic encryption/decryption example code came from this web site.
-// 
-//  https://wiki.openssl.org/index.php/EVP_Symmetric_Encryption_and_Decryption
-// 
+*
+*  Basic encryption/decryption example code came from this web site.
+*
+*  https://wiki.openssl.org/index.php/EVP_Symmetric_Encryption_and_Decryption
+*
 **********************************************************************************/
 
 
-
+/* encryption initialization values */
 static char* mEncryptionKey;
 static char* mEncryptionIV;
 
 
+/* helper function for loading error message data into the appropriate data structure */
 void handleErrors(const char* errorMessage, struct ErrorInfoData* errorData)
 {
   errorData->mErrorOccurred = true;
@@ -37,6 +39,51 @@ void handleErrors(const char* errorMessage, struct ErrorInfoData* errorData)
 }
 
 
+
+/* define a size for the plugin encryption signature
+ */
+#define PLUGIN_SIGNATURE_MAX_LENGTH 1024
+
+
+/* define a simple plugin signature, for the encryption.
+ */
+void getPluginSignature(char* signature)
+{
+  /* define the plugin encryption signature */
+  char mSignature[PLUGIN_SIGNATURE_MAX_LENGTH];
+  strcpy(mSignature,"{\"NAME\":\"");
+  strcat(mSignature,"g2EncryptDataAES256CBC");
+  strcat(mSignature,"\",\"KEY\":\"");
+  strcat(mSignature,mEncryptionKey);
+  strcat(mSignature,"\",\"IV\":\"");
+  strcat(mSignature,mEncryptionIV);
+  strcat(mSignature,"\"}");
+  {
+    /* Jenkins' one-at-a-time hash, public domain */
+    /* http://www.burtleburtle.net/bob/hash/doobs.html */
+    unsigned hash = 0;
+    const char *cp;
+    for ( cp = mSignature; *cp; ++cp )
+    {
+      hash += (*cp & 0xFF);
+      hash += (hash << 10);
+      hash ^= (hash >> 6);
+    }
+    hash += (hash << 3);
+    hash ^= (hash >> 11);
+    hash += (hash << 15);
+
+    char hashString[20];
+    sprintf(hashString,"%u",hash);
+    strcpy(signature,hashString);
+  }
+}
+
+
+
+/* Function used to initialize a plugin.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 {
   /* initialize the init-plugin function */
@@ -81,6 +128,10 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
   INIT_PLUGIN_FUNCTION_POSTAMBLE
 }
 
+
+/* Function used to close a plugin.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 {
   /* initialize the close-plugin function */
@@ -97,42 +148,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 }
 
 
-#define PLUGIN_SIGNATURE_MAX_LENGTH 1024
-
-
-void getPluginSignature(char* signature)
-{
-  /* define the plugin encryption signature */
-  char mSignature[PLUGIN_SIGNATURE_MAX_LENGTH];
-  strcpy(mSignature,"{\"NAME\":\"");
-  strcat(mSignature,"g2EncryptDataAES256CBC");
-  strcat(mSignature,"\",\"KEY\":\"");
-  strcat(mSignature,mEncryptionKey);
-  strcat(mSignature,"\",\"IV\":\"");
-  strcat(mSignature,mEncryptionIV);
-  strcat(mSignature,"\"}");
-  {
-    /* Jenkins' one-at-a-time hash, public domain */
-    /* http://www.burtleburtle.net/bob/hash/doobs.html */
-    unsigned hash = 0;
-    const char *cp;
-    for ( cp = mSignature; *cp; ++cp )
-    {
-      hash += (*cp & 0xFF);
-      hash += (hash << 10);
-      hash ^= (hash >> 6);
-    }
-    hash += (hash << 3);
-    hash ^= (hash >> 11);
-    hash += (hash << 15);
-
-    char hashString[20];
-    sprintf(hashString,"%u",hash);
-    strcpy(signature,hashString);
-  }
-}
-
-
+/* Function used to retrieve the plugin signature.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 {
   /* initialize get-signature function */
@@ -164,6 +182,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 }
 
 
+/* Function used to validate the plugin signature compatibility.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 {
   /* initialize get-signature function */
@@ -184,6 +205,8 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 }
 
 
+/* Function to do a simple encryption.
+ */
 int encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key, unsigned char *iv, unsigned char *ciphertext, struct ErrorInfoData* errorData)
 {
     EVP_CIPHER_CTX *ctx = NULL;
@@ -239,6 +262,8 @@ int encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key, uns
 }
 
 
+/* Function to do a simple decryption.
+ */
 int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, unsigned char *iv, unsigned char *plaintext, struct ErrorInfoData* errorData)
 {
     EVP_CIPHER_CTX *ctx = NULL;
@@ -295,6 +320,9 @@ int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, u
 }
 
 
+/* Function used to encrypt a data value.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 {
   /* initialize encryption function */
@@ -324,6 +352,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 }
 
 
+/* Function used to decrypt a data value.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 {
   /* initialize encryption function */
@@ -353,6 +384,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 }
 
 
+/* Function used to encrypt a data value (deterministic methods.)
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 {
   /* initialize encryption function */
@@ -382,6 +416,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 }
 
 
+/* Function used to decrypt a data value (deterministic methods.)
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
 {
   /* initialize encryption function */
