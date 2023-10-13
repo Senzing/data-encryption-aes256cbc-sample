@@ -7,9 +7,11 @@
 **********************************************************************************/
 
 
+/* encryption interface header */
 #include "interface/g2EncryptionPluginInterface.h"
 
 
+/* define a simple plugin signature, meaning cleartext. */
 const char* getPluginSignature()
 {
   static const char mSignature[] = "[CLEARTEXT]";
@@ -17,6 +19,9 @@ const char* getPluginSignature()
 }
 
 
+/* Function used to initialize a plugin.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 {
   /* initialize the init-plugin function */
@@ -30,6 +35,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 }
 
 
+/* Function used to close a plugin.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 {
   /* initialize the close-plugin function */
@@ -43,6 +51,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 }
 
 
+/* Function used to retrieve the plugin signature.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 {
   /* initialize get-signature function */
@@ -73,6 +84,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 }
 
 
+/* Function used to validate the plugin signature compatibility.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 {
   /* initialize get-signature function */
@@ -92,6 +106,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 }
 
 
+/* Function used to encrypt a data value.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 {
   /* initialize encryption function */
@@ -117,6 +134,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 }
 
 
+/* Function used to decrypt a data value.
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 {
   /* initialize encryption function */
@@ -142,6 +162,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 }
 
 
+/* Function used to encrypt a data value (deterministic methods.)
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 {
   /* initialize encryption function */
@@ -167,6 +190,9 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 }
 
 
+/* Function used to decrypt a data value (deterministic methods.)
+ * See the function prototype defintions for more information.
+ */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
 {
   /* initialize encryption function */
