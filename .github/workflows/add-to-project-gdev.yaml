@@ -1,4 +1,4 @@
-name: add to project community
+name: add to project gdev
 
 on:
   issues:
