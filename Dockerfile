@@ -13,18 +13,14 @@ FROM ${BASE_BUILDER_IMAGE} as builder
 
 ENV REFRESHED_AT=2024-05-22
 
-LABEL Name="senzing/data-encryption-aes256cbc-sample-builder" \
-      Maintainer="support@senzing.com" \
-      Version="1.0.9"
-
 # Install packages via apt.
 
 RUN apt-get update \
- && apt-get -y install \
-      librdkafka-dev \
-      cmake \
-      libssl-dev \
- && rm -rf /var/lib/apt/lists/*
+  && apt-get -y install \
+  librdkafka-dev \
+  cmake \
+  libssl-dev \
+  && rm -rf /var/lib/apt/lists/*
 
 # Copy files from repository.
 
@@ -34,8 +30,8 @@ COPY ./src /src
 
 WORKDIR /src
 RUN cmake -DCMAKE_BUILD_TYPE=Release setup . \
- && make all \
- && make install
+  && make all \
+  && make install
 
 # Output will be in:
 #  - /src/dist/lib/libg2EncryptDataAES256CBC.so
@@ -50,8 +46,8 @@ FROM ${BASE_IMAGE} as final
 ENV REFRESHED_AT=2024-05-22
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
-      Maintainer="support@senzing.com" \
-      Version="1.0.9"
+  Maintainer="support@senzing.com" \
+  Version="2.0.3"
 
 # Copy files from prior step.
 
