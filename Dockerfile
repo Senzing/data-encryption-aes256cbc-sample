@@ -49,7 +49,7 @@ ENV REFRESHED_AT=2024-06-24
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
   Maintainer="support@senzing.com" \
-  Version="2.0.3"
+  Version="2.0.4"
 
 USER 1001
 
