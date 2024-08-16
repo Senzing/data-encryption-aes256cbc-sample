@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-Sample encryption plugins for a G2 data repository.
+Sample encryption plugins for a Senzing data repository.
 
 ## Overview
 
@@ -11,7 +11,7 @@ Sample encryption plugins for a G2 data repository.
 1. [Preamble](#preamble)
     1. [Legend](#legend)
 1. [Expectations](#expectations)
-1. [Setting Up G2 Data Repository Encryption](#setting-up-g2-data-repository-encryption)
+1. [Setting Up Data Repository Encryption](#setting-up-data-repository-encryption)
     1. [General Setup Steps](#general-setup-steps)
     1. [Createing an encryption plugin library](#creating-an-encryption-plugin-library)
     1. [Configuring the engine to use encryption](#configuring-the-engine-to-use-encryption)
@@ -54,9 +54,9 @@ describing where we can improve.   Now on with the show...
 - **Background knowledge:** This repository assumes a working knowledge of:
   - [Docker](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/docker.md)
 
-## Setting Up G2 Data Repository Encryption
+## Setting Up Data Repository Encryption
 
-Data in the G2 engine repository may be encrypted using an external encryption plugin.
+Data in the engine repository may be encrypted using an external encryption plugin.
 This allows for users to decide when and how to encrypt their sensitive data.
 
 A data repository may be set up for encryption,
@@ -66,12 +66,12 @@ then the data repository must be encrypted with the utility program prior to usi
 
 ### General Setup Steps
 
-These are the general steps for setting up G2 data encryption.
+These are the general steps for setting up data encryption.
 
 1. Create an encryption plugin executable, for use in encrypting/decrypting data
 1. Configure the engine to use encryption
 1. Encrypt the data already in the datastore
-1. Use the G2 engine normally
+1. Use the Senzing engine normally
 
 More specific details follow.
 
@@ -83,15 +83,15 @@ The user may use an existing library, or create their own.  
 In this way, they may use any kind of encryption/decryption algorithm they choose.
 
 To create such a library,
-a program must be compiled that implements the G2 standard encryption interface.
+a program must be compiled that implements the standard encryption interface.
 That interface is available in the
 [senzing-data-encryption-specification](https://github.com/Senzing/senzing-data-encryption-specification).  
 The actual interface header file is located at
-[g2EncryptionPluginInterface.h](https://github.com/Senzing/senzing-data-encryption-specification/blob/main/src/interface/g2EncryptionPluginInterface.h).
+[szEncryptionPluginInterface.h](https://github.com/Senzing/senzing-data-encryption-specification/blob/main/src/interface/szEncryptionPluginInterface.h).
 
 The source code for a sample library is available on
 [GitHub](https://github.com/Senzing/data-encryption-AES256CBC-sample).  
-This library may be compiled on any operating system that G2 supports.  
+This library may be compiled on any operating system that Senzing supports.  
 When compiled, it will create two libraries:
 
 1. A simple cleartext demonstration library
@@ -106,7 +106,7 @@ the security and data standards of the user's organization.
 To enable encryption on the data repository,
 the engine must be set up with the encryption library in place.  
 
-Copy the encryption library into the `lib` folder of the G2 installation
+Copy the encryption library into the `lib` folder of the Senzing installation
 (e.g. `/opt/senzing/g2/lib`).
 Alternately, if you wish to have the library in a separate location,
 put the new location on your system path, so that the engine may find the library.
@@ -140,12 +140,12 @@ Example:
 ```
 
 1. With the library in place, and the encryption parameters set,
-   the G2 engine is now ready to encrypt/decrypt data.
+   the senzing engine is now ready to encrypt/decrypt data.
 
 ### Encrypting the data in the repository
 
 If data has been previously loaded into the data repository,
-then the data repository must be encrypted using the `g2db2encrypt` application.  
+then the data repository must be encrypted using the `szdbencrypt` application.  
 This program will step through the data repository, encrypting the sensitive contents of the repository.  
 It can also be used to decrypt a repository.
 
@@ -161,7 +161,7 @@ It can also be used to decrypt a repository.
 
     ```console
     cd {SENZING_G2_DIR}
-    ./bin/g2dbencrypt -c etc/G2Module.ini -e
+    ./bin/szdbencrypt -c etc/G2Module.ini -e
     ```
 
 1. Command to Decrypt.
@@ -169,7 +169,7 @@ It can also be used to decrypt a repository.
 
     ```console
     cd {SENZING_G2_DIR}
-    ./bin/g2dbencrypt -c etc/G2Module.ini -d
+    ./bin/szdbencrypt -c etc/G2Module.ini -d
     ```
 
 **Note:**  If you are changing the method of encryption from one form to another,
@@ -290,7 +290,7 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/
 
 1. Each plugin function has a "PREAMBLE" and "POSTAMBLE" macro.  These should be included in your plugin function implementations.  They help with operations such as error handling, buffer size checking, and so forth.  They are meant to simplify the handling of the data being passed into and out of the plugin.
 
-2. Each encrypt/decrypt call is provided with a memory buffer for returning result data.  If that buffer is found to be too small, then the function should return the code value G2_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR.  This will signal the G2 engine to retry, using a larger data buffer.  (See the PREAMBLE/POSTAMBLE macros to see how that return code is applied.)
+2. Each encrypt/decrypt call is provided with a memory buffer for returning result data.  If that buffer is found to be too small, then the function should return the code value SZ_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR.  This will signal the engine to retry, using a larger data buffer.  (See the PREAMBLE/POSTAMBLE macros to see how that return code is applied.)
 
 ## Errors
 

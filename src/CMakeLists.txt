@@ -1,5 +1,5 @@
 
-project(G2_ENCRYPTION_PLUGINS C) 
+project(SZ_ENCRYPTION_PLUGINS C) 
 cmake_minimum_required(VERSION 2.8)
 
 

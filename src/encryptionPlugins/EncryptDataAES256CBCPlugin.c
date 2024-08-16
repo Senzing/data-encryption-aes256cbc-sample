@@ -1,6 +1,6 @@
 
 /**********************************************************************************
- © Copyright Senzing, Inc. 2020-2023
+ © Copyright Senzing, Inc. 2020-2024
  The source code for this program is not published or otherwise divested
  of its trade secrets, irrespective of what has been deposited with the U.S.
  Copyright Office.
@@ -8,7 +8,7 @@
 
 
 /* header files */
-#include "interface/g2EncryptionPluginInterface.h"
+#include "interface/szEncryptionPluginInterface.h"
 #include <openssl/conf.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
@@ -33,8 +33,8 @@ static char* mEncryptionIV;
 void handleErrors(const char* errorMessage, struct ErrorInfoData* errorData)
 {
   errorData->mErrorOccurred = true;
-  strncpy(errorData->mErrorMessage, errorMessage, G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH-1);
-  errorData->mErrorMessage[G2_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH - 1] = '\0';
+  strncpy(errorData->mErrorMessage, errorMessage, SZ_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH-1);
+  errorData->mErrorMessage[SZ_ENCRYPTION_PLUGIN___MAX_ERROR_MESSAGE_LENGTH - 1] = '\0';
   /*fprintf(stderr,"DEBUG: [%s]\n",errorData->mErrorMessage);*/
 }
 
@@ -52,7 +52,7 @@ void getPluginSignature(char* signature)
   /* define the plugin encryption signature */
   char mSignature[PLUGIN_SIGNATURE_MAX_LENGTH];
   strcpy(mSignature,"{\"NAME\":\"");
-  strcat(mSignature,"g2EncryptDataAES256CBC");
+  strcat(mSignature,"szEncryptDataAES256CBC");
   strcat(mSignature,"\",\"KEY\":\"");
   strcat(mSignature,mEncryptionKey);
   strcat(mSignature,"\",\"IV\":\"");
@@ -84,7 +84,7 @@ void getPluginSignature(char* signature)
 /* Function used to initialize a plugin.
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
+SZ_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 {
   /* initialize the init-plugin function */
   INIT_PLUGIN_FUNCTION_PREAMBLE
@@ -132,7 +132,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 /* Function used to close a plugin.
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
+SZ_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 {
   /* initialize the close-plugin function */
   CLOSE_PLUGIN_FUNCTION_PREAMBLE
@@ -151,7 +151,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 /* Function used to retrieve the plugin signature.
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
+SZ_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 {
   /* initialize get-signature function */
   GET_SIGNATURE_FUNCTION_PREAMBLE
@@ -185,7 +185,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 /* Function used to validate the plugin signature compatibility.
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
+SZ_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 {
   /* initialize get-signature function */
   VALIDATE_SIGNATURE_COMPATIBILITY_FUNCTION_PREAMBLE
@@ -323,7 +323,7 @@ int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, u
 /* Function used to encrypt a data value.
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
+SZ_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 {
   /* initialize encryption function */
   ENCRYPT_DATA_FIELD_FUNCTION_PREAMBLE
@@ -355,7 +355,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 /* Function used to decrypt a data value.
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
+SZ_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 {
   /* initialize encryption function */
   DECRYPT_DATA_FIELD_FUNCTION_PREAMBLE
@@ -387,7 +387,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 /* Function used to encrypt a data value (deterministic methods.)
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
+SZ_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 {
   /* initialize encryption function */
   ENCRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_PREAMBLE
@@ -419,7 +419,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 /* Function used to decrypt a data value (deterministic methods.)
  * See the function prototype defintions for more information.
  */
-G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
+SZ_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
 {
   /* initialize encryption function */
   DECRYPT_DATA_FIELD_DETERMINISTIC_FUNCTION_PREAMBLE
