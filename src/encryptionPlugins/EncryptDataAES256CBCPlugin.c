@@ -1,6 +1,6 @@
 
 /**********************************************************************************
- © Copyright Senzing, Inc. 2020-2023
+ © Copyright Senzing, Inc. 2020-2024
  The source code for this program is not published or otherwise divested
  of its trade secrets, irrespective of what has been deposited with the U.S.
  Copyright Office.
@@ -159,12 +159,12 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
   /* get the native plugin encryption signature */
   char pluginSignature[PLUGIN_SIGNATURE_MAX_LENGTH];
   getPluginSignature(pluginSignature);
-  size_t pluginSignatureSize = strlen(pluginSignature);
 
   /* return the signature, or track errors */
   if (!(getSignatureErrorData.mErrorOccurred))
   {
     /* return the signature */
+    const size_t pluginSignatureSize = strlen(pluginSignature);
     if (pluginSignatureSize < (size_t)maxSignatureSize)
     {
       strcpy(signature, pluginSignature);
