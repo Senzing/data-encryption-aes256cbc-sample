@@ -9,7 +9,7 @@ ARG BASE_IMAGE=senzing/senzingapi-runtime:3.10.3
 # Stage: builder
 # -----------------------------------------------------------------------------
 
-FROM ${BASE_BUILDER_IMAGE} as builder
+FROM ${BASE_BUILDER_IMAGE} AS builder
 
 ENV REFRESHED_AT=2024-06-24
 
@@ -43,7 +43,7 @@ HEALTHCHECK CMD [[ -f /src/dist/lib/libg2EncryptDataAES256CBC.so ]] || exit 1
 # Stage: final
 # -----------------------------------------------------------------------------
 
-FROM ${BASE_IMAGE} as final
+FROM ${BASE_IMAGE} AS final
 
 ENV REFRESHED_AT=2024-06-24
 
