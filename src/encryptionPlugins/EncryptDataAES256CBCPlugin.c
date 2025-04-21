@@ -1,6 +1,6 @@
 
 /**********************************************************************************
- © Copyright Senzing, Inc. 2020-2024
+ © Copyright Senzing, Inc. 2020-2025
  The source code for this program is not published or otherwise divested
  of its trade secrets, irrespective of what has been deposited with the U.S.
  Copyright Office.
@@ -82,7 +82,7 @@ void getPluginSignature(char* signature)
 
 
 /* Function used to initialize a plugin.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 {
@@ -130,7 +130,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 
 
 /* Function used to close a plugin.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 {
@@ -149,7 +149,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 
 
 /* Function used to retrieve the plugin signature.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 {
@@ -183,7 +183,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 
 
 /* Function used to validate the plugin signature compatibility.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 {
@@ -207,11 +207,11 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 
 /* Function to do a simple encryption.
  */
-int encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key, unsigned char *iv, unsigned char *ciphertext, struct ErrorInfoData* errorData)
+int64_t encrypt(unsigned char *plaintext, size_t plaintext_len, unsigned char *key, unsigned char *iv, unsigned char *ciphertext, struct ErrorInfoData* errorData)
 {
     EVP_CIPHER_CTX *ctx = NULL;
     int len = 0;
-    int ciphertext_len = 0;
+    size_t ciphertext_len = 0;
 
     /* Create and initialise the context */
     if(!(ctx = EVP_CIPHER_CTX_new()))
@@ -264,11 +264,11 @@ int encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key, uns
 
 /* Function to do a simple decryption.
  */
-int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, unsigned char *iv, unsigned char *plaintext, struct ErrorInfoData* errorData)
+int64_t decrypt(unsigned char *ciphertext, size_t ciphertext_len, unsigned char *key, unsigned char *iv, unsigned char *plaintext, struct ErrorInfoData* errorData)
 {
     EVP_CIPHER_CTX *ctx = NULL;
     int len = 0;
-    int plaintext_len = 0;
+    size_t plaintext_len = 0;
 
     /* Create and initialise the context */
     if(!(ctx = EVP_CIPHER_CTX_new()))
@@ -305,7 +305,7 @@ int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, u
      * Finalise the decryption. Further plaintext bytes may be written at
      * this stage.
      */
-    int retVal = EVP_DecryptFinal_ex(ctx, plaintext + len, &len);
+    int64_t retVal = EVP_DecryptFinal_ex(ctx, plaintext + len, &len);
     if(1 != retVal)
     {
         handleErrors("Failed to finalize decryption",errorData);
@@ -321,7 +321,7 @@ int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, u
 
 
 /* Function used to encrypt a data value.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 {
@@ -331,7 +331,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
   /* encrypt the data */
   const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
   unsigned char* ciphertext = malloc(bufferLength * sizeof(char));
-  int ciphertext_len = encrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,ciphertext,&encryptionErrorData);
+  size_t ciphertext_len = encrypt((unsigned char*)input,(int64_t)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,ciphertext,&encryptionErrorData);
   if (!(encryptionErrorData.mErrorOccurred))
   {
     if (((size_t) ciphertext_len) < maxResultSize)
@@ -353,7 +353,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 
 
 /* Function used to decrypt a data value.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 {
@@ -363,7 +363,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
   /* decrypt the data */
   const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
   unsigned char* decryptedtext = malloc(bufferLength * sizeof(char));
-  int decryptedtext_len = decrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,decryptedtext,&decryptionErrorData);
+  size_t decryptedtext_len = decrypt((unsigned char*)input,(int64_t)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,decryptedtext,&decryptionErrorData);
   if (!(decryptionErrorData.mErrorOccurred))
   {
     if (((size_t) decryptedtext_len) < maxResultSize)
@@ -385,7 +385,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 
 
 /* Function used to encrypt a data value (deterministic methods.)
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 {
@@ -395,7 +395,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
   /* encrypt the data */
   const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
   unsigned char* ciphertext = malloc(bufferLength * sizeof(char));
-  int ciphertext_len = encrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,ciphertext,&encryptionErrorData);
+  size_t ciphertext_len = encrypt((unsigned char*)input,(int64_t)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,ciphertext,&encryptionErrorData);
   if (!(encryptionErrorData.mErrorOccurred))
   {
     if (((size_t) ciphertext_len) < maxResultSize)
@@ -417,7 +417,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 
 
 /* Function used to decrypt a data value (deterministic methods.)
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
 {
@@ -427,7 +427,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
   /* decrypt the data */
   const size_t bufferLength = inputSize + EVP_MAX_BLOCK_LENGTH;
   unsigned char* decryptedtext = malloc(bufferLength * sizeof(char));
-  int decryptedtext_len = decrypt((unsigned char*)input,(int)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,decryptedtext,&decryptionErrorData);
+  size_t decryptedtext_len = decrypt((unsigned char*)input,(int64_t)inputSize,(unsigned char*)mEncryptionKey,(unsigned char*)mEncryptionIV,decryptedtext,&decryptionErrorData);
   if (!(decryptionErrorData.mErrorOccurred))
   {
     if (((size_t) decryptedtext_len) < maxResultSize)

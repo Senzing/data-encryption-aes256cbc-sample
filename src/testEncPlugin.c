@@ -1,6 +1,6 @@
 
 /**********************************************************************************
- © Copyright Senzing, Inc. 2023
+ © Copyright Senzing, Inc. 2023-2025
  The source code for this program is not published or otherwise divested
  of its trade secrets, irrespective of what has been deposited with the U.S.
  Copyright Office.
@@ -13,7 +13,7 @@
 
 int main()
 {
-  int ret = 0;
+  int64_t ret = 0;
   size_t maxErrorSize = 1000;
   char error[maxErrorSize];
   size_t errorSize = 0;
@@ -30,7 +30,7 @@ int main()
   ret = G2Encryption_InitPlugin(&paramList, error, maxErrorSize, &errorSize);
   if (ret != 0)
   {
-	  fprintf(stderr, "G2Encryption_InitPlugin: [%d] [%s]\n", ret, error);
+	  fprintf(stderr, "G2Encryption_InitPlugin: [%ld] [%s]\n", ret, error);
 	  return ret;
   }
 
@@ -42,7 +42,7 @@ int main()
   ret = G2Encryption_EncryptDataField(input,inputSize, NULL, 0, &resultSize, error, maxErrorSize, &errorSize);
   if (ret != G2_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR)
   {
-	  fprintf(stderr, "G2Encryption_EncryptDataField (1): [%d] [%s]\n", ret, "Succeeded but shouldn't");
+	  fprintf(stderr, "G2Encryption_EncryptDataField (1): [%ld] [%s]\n", ret, "Succeeded but shouldn't");
 	  return -1;
   }
   error[0] = '\0';
@@ -53,7 +53,7 @@ int main()
   ret = G2Encryption_EncryptDataField(input,inputSize, result, maxResultSize, &resultSize, error, maxErrorSize, &errorSize);
   if (ret != G2_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR)
   {
-	  fprintf(stderr, "G2Encryption_EncryptDataField (2): [%d] [%s]\n", ret, "Succeeded but shouldn't");
+	  fprintf(stderr, "G2Encryption_EncryptDataField (2): [%ld] [%s]\n", ret, "Succeeded but shouldn't");
 	  return -1;
   }
   error[0] = '\0';
@@ -65,7 +65,7 @@ int main()
   ret = G2Encryption_EncryptDataField(input,inputSize, encryptedResult, inputSize, &encryptedSize, error, maxErrorSize, &errorSize);
   if (ret != G2_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR)
   {
-	  fprintf(stderr, "G2Encryption_EncryptDataField (3): [%d] [%s]\n", ret, "Succeeded but shouldn't");
+	  fprintf(stderr, "G2Encryption_EncryptDataField (3): [%ld] [%s]\n", ret, "Succeeded but shouldn't");
 	  return -1;
   }
   error[0] = '\0';
@@ -73,7 +73,7 @@ int main()
   ret = G2Encryption_EncryptDataField(input,inputSize, encryptedResult, maxEncryptedResult, &encryptedSize, error, maxErrorSize, &errorSize);
   if (ret != 0)
   {
-	  fprintf(stderr, "G2Encryption_EncryptDataField (4): [%d] [%s]\n", ret, error);
+	  fprintf(stderr, "G2Encryption_EncryptDataField (4): [%ld] [%s]\n", ret, error);
 	  return ret;
   }
 
@@ -81,7 +81,7 @@ int main()
   ret = G2Encryption_DecryptDataField(encryptedResult,encryptedSize, NULL, 0, &resultSize, error, maxErrorSize, &errorSize);
   if (ret != G2_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR)
   {
-	  fprintf(stderr, "G2Encryption_DecryptDataField (1): [%d] [%s]\n", ret, "Succeeded but shouldn't");
+	  fprintf(stderr, "G2Encryption_DecryptDataField (1): [%ld] [%s]\n", ret, "Succeeded but shouldn't");
 	  return ret;
   }
   error[0] = '\0';
@@ -89,7 +89,7 @@ int main()
   ret = G2Encryption_DecryptDataField(encryptedResult,encryptedSize, result, maxResultSize, &resultSize, error, maxErrorSize, &errorSize);
   if (ret != G2_ENCRYPTION_PLUGIN___OUTPUT_BUFFER_SIZE_ERROR)
   {
-	  fprintf(stderr, "G2Encryption_DecryptDataField (2): [%d] [%s]\n", ret, "Succeeded but shouldn't");
+	  fprintf(stderr, "G2Encryption_DecryptDataField (2): [%ld] [%s]\n", ret, "Succeeded but shouldn't");
 	  return -1;
   }
   error[0] = '\0';
@@ -101,7 +101,7 @@ int main()
   ret = G2Encryption_DecryptDataField(encryptedResult,encryptedSize, decryptedResult, encryptedSize, &decryptedSize, error, maxErrorSize, &errorSize);
   if (ret != 0)
   {
-	  fprintf(stderr, "G2Encryption_DecryptDataField (3): [%d] [%s]\n", ret, error);
+	  fprintf(stderr, "G2Encryption_DecryptDataField (3): [%ld] [%s]\n", ret, error);
 	  return ret;
   }
   error[0] = '\0';
@@ -109,14 +109,14 @@ int main()
   ret = G2Encryption_DecryptDataField(encryptedResult,encryptedSize, decryptedResult, maxDecryptedResult, &decryptedSize, error, maxErrorSize, &errorSize);
   if (ret != 0)
   {
-	  fprintf(stderr, "G2Encryption_DecryptDataField (4): [%d] [%s]\n", ret, error);
+	  fprintf(stderr, "G2Encryption_DecryptDataField (4): [%ld] [%s]\n", ret, error);
 	  return ret;
   }
 
   ret = strncmp(input,decryptedResult,decryptedSize);
   if (ret != 0 || inputSize != decryptedSize)
   {
-	  fprintf(stderr, "strcmp results: [%d] [%s] != [%s]\n", ret, input, decryptedResult);
+	  fprintf(stderr, "strcmp results: [%ld] [%s] != [%s]\n", ret, input, decryptedResult);
 	  return ret;
   }
 
