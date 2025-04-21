@@ -1,6 +1,6 @@
 
 /**********************************************************************************
- © Copyright Senzing, Inc. 2023-2024
+ © Copyright Senzing, Inc. 2023-2025
  The source code for this program is not published or otherwise divested
  of its trade secrets, irrespective of what has been deposited with the U.S.
  Copyright Office.
@@ -20,7 +20,7 @@ const char* getPluginSignature()
 
 
 /* Function used to initialize a plugin.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 {
@@ -36,7 +36,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_INIT_PLUGIN
 
 
 /* Function used to close a plugin.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 {
@@ -52,7 +52,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_CLOSE_PLUGIN
 
 
 /* Function used to retrieve the plugin signature.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 {
@@ -85,7 +85,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_GET_SIGNATURE
 
 
 /* Function used to validate the plugin signature compatibility.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_VALIDATE_SIGNATURE_COMPATIBILITY
 {
@@ -123,7 +123,7 @@ void reverseContentsOfBuffer(char *buffer,const size_t bufferSizeToReverse)
 
 
 /* Function used to encrypt a data value.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 {
@@ -152,7 +152,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD
 
 
 /* Function used to decrypt a data value.
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 {
@@ -181,7 +181,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD
 
 
 /* Function used to encrypt a data value (deterministic methods.)
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 {
@@ -210,7 +210,7 @@ G2_ENCRYPTION_PLUGIN_FUNCTION_ENCRYPT_DATA_FIELD_DETERMINISTIC
 
 
 /* Function used to decrypt a data value (deterministic methods.)
- * See the function prototype defintions for more information.
+ * See the function prototype definitions for more information.
  */
 G2_ENCRYPTION_PLUGIN_FUNCTION_DECRYPT_DATA_FIELD_DETERMINISTIC
 {
