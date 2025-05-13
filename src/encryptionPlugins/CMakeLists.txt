@@ -16,12 +16,12 @@ set_target_properties(g2EncryptDataClearText PROPERTIES LINK_FLAGS "${LINK_FLAGS
 set_target_properties(g2EncryptDataReverseText PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
 set_target_properties(g2EncryptDataAES256CBC PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
 
-if ( WIN32 )
-else ()
-  set_target_properties(g2EncryptDataClearText PROPERTIES SUFFIX ".so")
-  set_target_properties(g2EncryptDataReverseText PROPERTIES SUFFIX ".so")
-  set_target_properties(g2EncryptDataAES256CBC PROPERTIES SUFFIX ".so")
-endif ()
+#if ( WIN32 )
+#else ()
+#  set_target_properties(g2EncryptDataClearText PROPERTIES SUFFIX ".so")
+#  set_target_properties(g2EncryptDataReverseText PROPERTIES SUFFIX ".so")
+#  set_target_properties(g2EncryptDataAES256CBC PROPERTIES SUFFIX ".so")
+#endif ()
 
 target_link_libraries(g2EncryptDataClearText ${OSCORELIBS} )
 target_link_libraries(g2EncryptDataReverseText ${OSCORELIBS} )
