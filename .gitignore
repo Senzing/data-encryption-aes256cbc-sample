@@ -52,5 +52,8 @@ Mkfile.old
 dkms.conf
 target
 
+# Visual Studio code
+.vscode/*
+!.vscode/cspell.json
+*.code-workspace
 .history
-.vscode
