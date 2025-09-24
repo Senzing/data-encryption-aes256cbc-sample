@@ -2,7 +2,7 @@
 # Stages
 # -----------------------------------------------------------------------------
 
-ARG BASE_BUILDER_IMAGE=debian:11.9-slim@sha256:acc5810124f0929ab44fc7913c0ad936b074cbd3eadf094ac120190862ba36c4
+ARG BASE_BUILDER_IMAGE=debian:11.11-slim@sha256:6d3c63184632046054ae709964befc943ecffa140adc697ca955a10002a79c08
 ARG BASE_IMAGE=senzing/senzingapi-runtime:3.10.3
 
 # -----------------------------------------------------------------------------
