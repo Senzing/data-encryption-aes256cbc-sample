@@ -3,7 +3,7 @@
 # -----------------------------------------------------------------------------
 
 ARG BASE_BUILDER_IMAGE=debian:13.1-slim@sha256:c2880112cc5c61e1200c26f106e4123627b49726375eb5846313da9cca117337
-ARG BASE_IMAGE=senzing/senzingapi-runtime:3.10.3@sha256:232bb4241e85066a7af46e4d05dfa67bbd2be1565f7b51f31950f5fb0b481ef5
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.12.8@sha256:3663a1971e564af4d12ecdb0c90a4f46418b77dc229ec6c9f692efc59d1c67ae
 
 # -----------------------------------------------------------------------------
 # Stage: builder
