@@ -19,6 +19,7 @@ RUN apt-get update \
   && apt-get -y --no-install-recommends install \
   librdkafka-dev \
   cmake \
+  build-essential \
   libssl-dev \
   && rm -rf /var/lib/apt/lists/*
 
