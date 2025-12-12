@@ -63,7 +63,5 @@
     "toplevel",
     "ubsec"
   ],
-  "ignorePaths": [
-    ".git/**"
-  ]
+  "ignorePaths": [".git/**"]
 }
