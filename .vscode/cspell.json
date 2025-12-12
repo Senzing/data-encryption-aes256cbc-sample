@@ -24,6 +24,7 @@
     "dkms",
     "DLOCAL",
     "DNOMINMAX",
+    "dockerfiles",
     "dockerhub",
     "DWIN",
     "dylib",
@@ -64,7 +65,5 @@
     "ubsec",
     "Werror"
   ],
-  "ignorePaths": [
-    ".git/**"
-  ]
+  "ignorePaths": [".git/**"]
 }
