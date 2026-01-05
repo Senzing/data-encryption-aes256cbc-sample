@@ -11,7 +11,7 @@ ARG BASE_IMAGE=senzing/senzingapi-runtime:3.13.0@sha256:edca155d3601238fab622a7d
 
 FROM ${BASE_BUILDER_IMAGE} AS builder
 
-ENV REFRESHED_AT=2024-06-24
+ENV REFRESHED_AT=2026-01-05
 
 # Install packages via apt.
 
@@ -46,7 +46,7 @@ HEALTHCHECK CMD [[ -f /src/dist/lib/libg2EncryptDataAES256CBC.so ]] || exit 1
 
 FROM ${BASE_IMAGE} AS final
 
-ENV REFRESHED_AT=2024-06-24
+ENV REFRESHED_AT=2026-01-05
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
   Maintainer="support@senzing.com" \
