@@ -2,7 +2,7 @@
 # Stages
 # -----------------------------------------------------------------------------
 
-ARG BASE_BUILDER_IMAGE=debian:13.2-slim@sha256:e711a7b30ec1261130d0a121050b4ed81d7fb28aeabcf4ea0c7876d4e9f5aca2
+ARG BASE_BUILDER_IMAGE=debian:13.2-slim@sha256:4bcb9db66237237d03b55b969271728dd3d955eaaa254b9db8a3db94550b1885
 ARG BASE_IMAGE=senzing/senzingapi-runtime:3.13.0@sha256:edca155d3601238fab622a7dd86471046832328d21f71f7bb2ae5463157f6e10
 
 # -----------------------------------------------------------------------------
@@ -11,7 +11,7 @@ ARG BASE_IMAGE=senzing/senzingapi-runtime:3.13.0@sha256:edca155d3601238fab622a7d
 
 FROM ${BASE_BUILDER_IMAGE} AS builder
 
-ENV REFRESHED_AT=2024-06-24
+ENV REFRESHED_AT=2026-01-05
 
 # Install packages via apt.
 
@@ -46,7 +46,7 @@ HEALTHCHECK CMD [[ -f /src/dist/lib/libg2EncryptDataAES256CBC.so ]] || exit 1
 
 FROM ${BASE_IMAGE} AS final
 
-ENV REFRESHED_AT=2024-06-24
+ENV REFRESHED_AT=2026-01-05
 
 LABEL Name="senzing/data-encryption-aes256cbc-sample" \
   Maintainer="support@senzing.com" \
