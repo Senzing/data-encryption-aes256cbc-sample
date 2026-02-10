@@ -38,6 +38,7 @@
     "gost",
     "ICLA",
     "inlines",
+    "kernelsam",
     "libeay",
     "libg",
     "librdkafka",
@@ -65,5 +66,7 @@
     "ubsec",
     "Werror"
   ],
-  "ignorePaths": [".git/**"]
+  "ignorePaths": [
+    ".git/**"
+  ]
 }
