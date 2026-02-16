@@ -66,7 +66,5 @@
     "ubsec",
     "Werror"
   ],
-  "ignorePaths": [
-    ".git/**"
-  ]
+  "ignorePaths": [".git/**"]
 }
