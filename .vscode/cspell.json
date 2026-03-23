@@ -28,7 +28,6 @@
     "dockerhub",
     "DWIN",
     "dylib",
-    "esbenp",
     "Finalise",
     "fvisibility",
     "gdev",
@@ -66,5 +65,7 @@
     "ubsec",
     "Werror"
   ],
-  "ignorePaths": [".git/**"]
+  "ignorePaths": [
+    ".git/**"
+  ]
 }
