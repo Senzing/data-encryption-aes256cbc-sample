@@ -1,5 +1,9 @@
 # data-encryption-aes256cbc-sample
 
+## :no_entry: Deprecated
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 ## Synopsis
 
 Sample encryption plugins for a G2 data repository.
